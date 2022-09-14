@@ -11,14 +11,7 @@ class skin{
     toString(){
         return"Personaje: " + this.personaje + " | Nombre del skin: " + this.nombre + " | Bundle: " + this.bundle + " | Precio: " + this.precio + " RP";
     }
-    /*
-    getName(){
-        return this.personaje;
-    }
-
-    getSkin(){  
-        return this.nombre;
-    }*/
+ 
 }
 function menorAMayor(a,b) {
     return (a.precio) - (b.precio);
@@ -65,6 +58,12 @@ campeonato2019.push(new skin ("Campeonato", "Tresh",565 , "Campeonato 2019"))
 const todosPjs = [].concat(valquirias).concat(guardianesEstelares).concat(campeonato2019);
 //Selector de grupos o bundles de cada skins
 
+
+let h2 = document.getElementById("h2");
+console.log(h2.innerText);
+
+
+
 function bundleSelecter() {
     let bundles = parseInt(prompt(
         "Elegí un bundle \n 1-Valquirias de acero \n 2-Guardianes Estelares \n 3-Campeonato 2019 \n 4-TodosLosPersonajes"
@@ -76,6 +75,7 @@ function bundleSelecter() {
             console.log(champion.toString());
         }
         console.log(valquirias.sort(menorAMayor));
+        h2.innerText = "ELejiste Valquirias"
     }
 
     else if (bundles == "2") {
@@ -83,6 +83,7 @@ function bundleSelecter() {
             console.log(champion1.toString());
         }
         console.log(guardianesEstelares.sort(menorAMayor))
+        h2.innerText = "Eejiste GuardianesEstelares"
     }
 
     else if (bundles == "3") {
@@ -90,7 +91,9 @@ function bundleSelecter() {
             console.log(champion2.toString());
         }
         console.log(campeonato2019.sort(menorAMayor));
+        h2.innerText = "Elejiste Campeonato 2019"
     }
+
     else if (bundles == "4"){
         console.log("todos ordenados Mayor a menor:");
         console.log(todosPjs.sort(mayorAMenor));
@@ -98,12 +101,12 @@ function bundleSelecter() {
         console.log(todosPjs.sort(menorAMayor));
         let nombre = prompt("Elija nombre de personaje")
         console.log(porNombre(nombre,todosPjs))
-        
+
+        h2.innerText = "Elejiste Todos Los Personajes"
     }   
     
     else{
         bundleSelecter();
     }
 }
-
 bundleSelecter();
