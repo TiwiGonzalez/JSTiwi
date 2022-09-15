@@ -58,55 +58,142 @@ campeonato2019.push(new skin ("Campeonato", "Tresh",565 , "Campeonato 2019"))
 const todosPjs = [].concat(valquirias).concat(guardianesEstelares).concat(campeonato2019);
 //Selector de grupos o bundles de cada skins
 
+function insertAfter(newNode, existingNode) {
+    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+}
 
-let h2 = document.getElementById("h2");
-console.log(h2.innerText);
+document.getElementById("form1").addEventListener('submit', functSubmit);
 
 
 
-function bundleSelecter() {
-    let bundles = parseInt(prompt(
-        "Elegí un bundle \n 1-Valquirias de acero \n 2-Guardianes Estelares \n 3-Campeonato 2019 \n 4-TodosLosPersonajes"
-    ))
+function functSubmit(event) {
+    event.preventDefault()
+    let bundles = document.getElementById("input").value;
+    let contenedor = document.getElementById("contenedorTexto")
+    let sorteados = document.getElementById("sorteados")
+    let sorteotext = document.querySelectorAll('.sorttxt');
+    let tipoElegido = document.getElementById('tipoElegido');
+    
 
     if (bundles == "1") {
         //Foreach con el array.
-        for (let champion of valquirias) {
-            console.log(champion.toString());
-        }
-        console.log(valquirias.sort(menorAMayor));
-        h2.innerText = "ELejiste Valquirias"
+        sorteotext.forEach(text => {
+            text.style.display = "block";
+        });
+
+        tipoElegido.textContent += " valquirias"
+        valquirias.forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            contenedor.appendChild(li);
+        })
+
+        
+        valquirias.sort(menorAMayor).forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            sorteados.appendChild(li);
+        })
+
     }
 
     else if (bundles == "2") {
-        for (let champion1 of guardianesEstelares) {
-            console.log(champion1.toString());
-        }
-        console.log(guardianesEstelares.sort(menorAMayor))
-        h2.innerText = "Eejiste GuardianesEstelares"
+        sorteotext.forEach(text => {
+            text.style.display = "block";
+        });
+
+        tipoElegido.textContent += " guardianes estelares"
+        guardianesEstelares.forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            contenedor.appendChild(li);
+        })
+
+        
+        guardianesEstelares.sort(menorAMayor).forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            sorteados.appendChild(li);
+        })
     }
 
     else if (bundles == "3") {
-        for (let champion2 of campeonato2019){
-            console.log(champion2.toString());
-        }
-        console.log(campeonato2019.sort(menorAMayor));
-        h2.innerText = "Elejiste Campeonato 2019"
-    }
+        sorteotext.forEach(text => {
+            text.style.display = "block";
+        });
 
+        tipoElegido.textContent += " campeonato 2019"
+        campeonato2019.forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            contenedor.appendChild(li);
+        })
+
+        
+        campeonato2019.sort(menorAMayor).forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            sorteados.appendChild(li);
+        })
+    }
+    /*
     else if (bundles == "4"){
-        console.log("todos ordenados Mayor a menor:");
-        console.log(todosPjs.sort(mayorAMenor));
-        console.log("todos ordenados Menor a mayor:");
-        console.log(todosPjs.sort(menorAMayor));
-        let nombre = prompt("Elija nombre de personaje")
-        console.log(porNombre(nombre,todosPjs))
+        let primerTipo = document.createElement('span')
+        primerTipo.textContent = "Elejiste todos los personajes"
 
-        h2.innerText = "Elejiste Todos Los Personajes"
-    }   
-    
-    else{
-        bundleSelecter();
-    }
+        todos.appendChild(primerTipo);
+        insertAfter(document.createElement('br'),todos.lastElementChild)
+        let textoMayorAMenor = document.createElement('span')
+        textoMayorAMenor.textContent = "Mayor a menor"
+
+        insertAfter(document.createElement('br'),todos.lastElementChild)
+        insertAfter(textoMayorAMenor,todos.lastElementChild)
+
+        todosPjs.sort(mayorAMenor).forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            todos.appendChild(li);
+        })
+
+        let textoMenorAMAyor = document.createElement('span')
+        textoMenorAMAyor.textContent = "Menor a mayor"
+
+        insertAfter(document.createElement('br'),todos.lastElementChild)
+        insertAfter(textoMenorAMAyor,todos.lastElementChild)
+        insertAfter(document.createElement('br'),todos.lastElementChild)
+
+        todosPjs.sort(menorAMayor).forEach((champion)=>{
+            let li = document.createElement("li");
+            li.innerText = champion.toString();
+            todos.appendChild(li);
+        })
+
+        let formularioNombre = document.createElement('form');
+        formularioNombre.setAttribute('id', 'form2');
+        formularioNombre.innerHTML = `
+            <br>
+            <label for="input2">Ingrese nombre:</label>
+            <input type="text2" id="input2" >
+            <input type="submit" id="botonInput2" value="Submit">
+        `;
+        insertAfter(formularioNombre,todos.lastElementChild)
+
+        
+        
+        document.getElementById("form2").addEventListener("submit", function(){
+            event.preventDefault()
+            let nombreInput = document.getElementById('input2')
+            let porNombre = document.createElement('span')
+            porNombre.textContent = "por nombre"
+
+            insertAfter(porNombre,todos.lastElementChild)
+            let pjsPorNombre = porNombre(nombreInput,todosPjs)
+            pjsPorNombre.forEach((champion)=>{
+                let li = document.createElement("li");
+                li.innerText = champion.toString();
+                todos.appendChild(li);
+            })
+        },);*/
+
+
 }
-bundleSelecter();
