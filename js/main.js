@@ -1,3 +1,24 @@
+//Funcion que crea id unicos para cada objeto. (FUNCIONA PARA TODOS LOS OBJETOS.)
+//una vez utilizado el atributo.uniqueId se le asignara como atributo un id unico dependiendo del contador id.
+//funciona modificadno las propiedads "built in" de cada objeto en su prototype. agregando el atributo uniqueId.
+(function() {
+    //si el el prototypo de objeto tiene a uniqueId como "undefined" (no lo existe).
+    if ( typeof Object.prototype.uniqueId == "undefined" ) {
+        //contador de ids
+        var id = 0;
+        //funcion uniqueId que asigna el id y suma al contador.
+        Object.prototype.uniqueId = function() {
+            //si el objeto "this" (objeto al que estoy referenciando) tiene el uniqueId en undefined lo crea y lo retorna si ya esta lo retorna simplemente.
+            if ( typeof this.__uniqueid == "undefined" ) {
+                this.__uniqueid = ++id;
+            }
+            return this.__uniqueid;
+        };
+    }
+})();
+
+    
+
 //Galería de aspectos de personajes de un videojuego (League of Legends)
 //A continuación, bundles y precios de cada uno
 class skin{
@@ -32,6 +53,19 @@ function porNombre(nombrePj,array){
         }
     }
     return skins;
+}
+
+localStorage.clear();
+
+function championsToJsonStorage(champions){
+    for(let champion of champions){
+        console.log(localStorage.getItem(champion.uniqueId()))
+        if(!localStorage.getItem(champion.uniqueId())){
+            localStorage.setItem(champion.uniqueId(), JSON.stringify(champion));
+        }else{
+            console.log(champion.personaje+" ya existe en el localStorage");
+        }
+    }
 }
 
 //Bundle Valquirias de acero
@@ -197,3 +231,7 @@ function functSubmit(event) {
 
 
 }
+
+championsToJsonStorage(valquirias);
+championsToJsonStorage(valquirias);
+
