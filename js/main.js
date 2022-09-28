@@ -1,6 +1,7 @@
 //Funcion que crea id unicos para cada objeto. (FUNCIONA PARA TODOS LOS OBJETOS.)
 //una vez utilizado el atributo.uniqueId se le asignara como atributo un id unico dependiendo del contador id.
 //funciona modificadno las propiedads "built in" de cada objeto en su prototype. agregando el atributo uniqueId.
+/*
 (function() {
     //si el el prototypo de objeto tiene a uniqueId como "undefined" (no lo existe).
     if ( typeof Object.prototype.uniqueId == "undefined" ) {
@@ -15,7 +16,10 @@
             return this.__uniqueid;
         };
     }
-})();
+})();*/
+
+
+
 
     
 
@@ -27,6 +31,7 @@ class skin{
         this.personaje = personaje;
         this.precio = precio;
         this.bundle = bundle;
+        this.id = uuid.v4();
     }
     //Uso del "toString" para reciclar lineas de codigo y esté más optimizado
     toString(){
@@ -59,9 +64,9 @@ localStorage.clear();
 
 function championsToJsonStorage(champions){
     for(let champion of champions){
-        console.log(localStorage.getItem(champion.uniqueId()))
-        if(!localStorage.getItem(champion.uniqueId())){
-            localStorage.setItem(champion.uniqueId(), JSON.stringify(champion));
+        console.log(localStorage.getItem(champion.id))
+        if(!localStorage.getItem(champion.id)){
+            localStorage.setItem(champion.id, JSON.stringify(champion));
         }else{
             console.log(champion.personaje+" ya existe en el localStorage");
         }
@@ -170,6 +175,14 @@ function functSubmit(event) {
             sorteados.appendChild(li);
         })
     }
+
+    else {
+        Swal.fire(
+            'Tenes que ingresar un numero',
+            '',
+            'warning'
+          )
+    }
     /*
     else if (bundles == "4"){
         let primerTipo = document.createElement('span')
@@ -234,4 +247,3 @@ function functSubmit(event) {
 
 championsToJsonStorage(valquirias);
 championsToJsonStorage(valquirias);
-
